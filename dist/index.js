@@ -14,7 +14,7 @@ const getParentWindow = () => {
 }
 
 const receiveParentMessage = (event) => {
-  if (event.data.type === 'metamask:registrationCompleted') {
+  if (event.data.type === 'keplr:registrationCompleted') {
     console.log('Onboarding complete; closing window')
     window.close()
   } else {
@@ -38,8 +38,8 @@ const initialize = () => {
   parentWindow = getParentWindow()
   window.addEventListener('message', receiveMessage)
   reloadParentInterval = setInterval(() => {
-    console.debug('Sending metamask:reload message')
-    parentWindow.postMessage({ type: 'metamask:reload' }, '*')
+    console.debug('Sending keplr:reload message')
+    parentWindow.postMessage({ type: 'keplr:reload' }, '*')
   }, parentMessageInterval)
 }
 window.addEventListener('DOMContentLoaded', initialize)
