@@ -12,7 +12,8 @@
   ],
   "scripts": {
     "start": "static-server ./dist --port 9010",
-    "deploy": "./deploy.sh"
+    "deploy": "./deploy.sh",
+    "deploy-to-firebase": "firebase deploy --only hosting:keplr-forwarder"
   },
   "devDependencies": {
     "static-server": "^2.2.1"
