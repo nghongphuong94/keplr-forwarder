@@ -31,7 +31,7 @@ const receiveMessage = (event) => {
 }
 
 const initialize = () => {
-  if (window.web3 === undefined) {
+  if (window.keplr === undefined) {
     return setTimeout(() => window.location.reload(), refreshInterval)
   }
 
