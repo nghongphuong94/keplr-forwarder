@@ -1,5 +1,6 @@
-const refreshInterval = 3000
+const refreshInterval = 5000
 const parentMessageInterval = 1000
+const delayForKeplrInjection = 3000
 let reloadParentInterval
 let parentWindow
 
@@ -31,15 +32,17 @@ const receiveMessage = (event) => {
 }
 
 const initialize = () => {
-  if (window.keplr === undefined) {
-    return setTimeout(() => window.location.reload(), refreshInterval)
-  }
+  setTimeout(() => {
+    if (window.keplr === undefined) {
+      return setTimeout(() => window.location.reload(), refreshInterval)
+    }
 
-  parentWindow = getParentWindow()
-  window.addEventListener('message', receiveMessage)
-  reloadParentInterval = setInterval(() => {
-    console.debug('Sending keplr:reload message')
-    parentWindow.postMessage({ type: 'keplr:reload' }, '*')
-  }, parentMessageInterval)
+    parentWindow = getParentWindow()
+    window.addEventListener('message', receiveMessage)
+    reloadParentInterval = setInterval(() => {
+      console.debug('Sending keplr:reload message')
+      parentWindow.postMessage({ type: 'keplr:reload' }, '*')
+    }, parentMessageInterval)
+  }, delayForKeplrInjection);
 }
 window.addEventListener('DOMContentLoaded', initialize)
